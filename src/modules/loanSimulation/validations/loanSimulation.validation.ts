@@ -1,10 +1,23 @@
 import * as yup from "yup";
-import { INPUT_ERRORS } from "../../../utils/contants";
+import { AllBrazilStates, INPUT_ERRORS } from "../../../utils/contants";
 import { MoneyRemoveMask } from "../../../utils";
+import { cpf } from "cpf-cnpj-validator";
 
 export const loanSimulationValidation = yup.object().shape({
-    cpf: yup.string().required(INPUT_ERRORS.INPUT_ERROR_REQUIRED),
-    uf: yup.string().required(INPUT_ERRORS.INPUT_ERROR_REQUIRED),
+    cpf: yup.string().required(INPUT_ERRORS.INPUT_ERROR_REQUIRED).test(
+        'is-one-percent', 
+        INPUT_ERRORS.INPUT_ERROR_INVALID, 
+        function(value) {
+          return cpf.isValid(value)
+        }
+      ),
+    uf: yup.string().required(INPUT_ERRORS.INPUT_ERROR_REQUIRED).test(
+        'is-one-percent', 
+        INPUT_ERRORS.INPUT_ERROR_INVALID, 
+        function(value) {
+          return AllBrazilStates.includes(value.toUpperCase())
+        }
+      ),
     bornDate: yup.string().required(INPUT_ERRORS.INPUT_ERROR_REQUIRED),
     valueToLoan: yup.string().required(INPUT_ERRORS.INPUT_ERROR_REQUIRED).test(
         'is-one-percent', 

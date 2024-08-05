@@ -15,7 +15,7 @@ export const LoanSimulationForm = () => {
         e.target.value = applyPattern({ value: e.target.value, pattern })
         setFieldValue(e.target.name, e.target.value)
     }
-    console.log(errors, touched)
+
     return <Grid height={"100%"}>
         <Grid sx={{ display: "flex", justifyContent: "center", marginTop: "5rem" }}>
             <Typography
