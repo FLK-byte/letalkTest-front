@@ -19,7 +19,7 @@ export const LoanSimulationFragment = () => {
             toast("Empréstimo solicitado com sucesso!", { type: "success" })
         }}
     >
-        <Grid height={"100%"}>
+        <Grid height={"100%"} width={"50%"}>
             <Grid height={"50%"}>
                 <Typography
                     variant={"h1"}
@@ -29,7 +29,6 @@ export const LoanSimulationFragment = () => {
                 >
                     Simule e solicite o seu empréstimo.
                 </Typography>
-
                 <LoanSimulationForm />
             </Grid>
         </Grid>

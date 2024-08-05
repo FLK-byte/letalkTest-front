@@ -6,11 +6,11 @@ export const MoneyMask = (value: string | number): string => {
     parsedValue = value.toFixed(2);
   }
 
-  return VMasker.toMoney(parsedValue);
+  return VMasker.toMoney(parsedValue, {unit: "R$"});
 };
 
 export const MoneyRemoveMask = (value: string) => {
-  return value.replace(MoneyReplaceRegex, "").replace(",", ".");
+  return value.replace(MoneyReplaceRegex, "").replace("R$", "").replace(",", ".");
 };
 
 export const MoneyReplaceRegex = /[.]/gm;
