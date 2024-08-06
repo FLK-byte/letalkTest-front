@@ -5,6 +5,8 @@ import { loanSimulationValidation } from "../validations"
 import { toast } from "react-toastify"
 import { ViewLoanSimulation } from "../components"
 import { useState } from "react"
+import { AxiosService } from "../../../services/api"
+import moment from "moment"
 
 export const LoanSimulationFragment = () => {
     const [formValues, setFormValues] = useState<undefined | {
@@ -58,6 +60,21 @@ export const LoanSimulationFragment = () => {
                         loanValuePerMonth={props.values.valueToPayPerMonth}
                         totalLoanValue={props.values.valueToLoan}
                         uf={props.values.uf}
+                        onClickLoan={async ({ paymentsPerMonth }) => {
+                            const response = await AxiosService.post("/loans", {
+                                userInfo: {
+                                    cpf: props.values.cpf,
+                                    uf: props.values.uf,
+                                    bornDate: moment(props.values.bornDate),
+                                    valueToLoan: props.values.valueToLoan,
+                                    valueToPayPerMonth: props.values.valueToPayPerMonth,
+                                },
+                                loansInfo: paymentsPerMonth.map((payPerMonth) => {
+                                    return { ...payPerMonth, monthToPay: moment(payPerMonth.monthToPay) }
+                                })
+                            })
+                            console.log(response)
+                        }}
                     />
                 </Grid>}
             </Grid>
