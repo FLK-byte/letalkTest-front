@@ -10,7 +10,7 @@ export const MoneyMask = (value: string | number): string => {
 };
 
 export const MoneyRemoveMask = (value: string) => {
-  return value.replace(MoneyReplaceRegex, "").replace("R$", "").replace(",", ".");
+  return value.replace(MoneyReplaceRegex, "").replace("R$ ", "").replace(",", ".");
 };
 
 export const MoneyReplaceRegex = /[.]/gm;

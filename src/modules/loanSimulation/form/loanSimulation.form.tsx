@@ -27,12 +27,12 @@ export const LoanSimulationForm = () => {
         </Grid>
         <Grid marginTop={"1.5rem"} height={"100%"}>
             <Paper elevation={1} sx={{ padding: "3rem", height: "100%" }}>
-                <Grid container height={"100%"} display={"flex"} wrap="wrap" xs={12}>
+                <Grid container height={"100%"} display={"flex"} wrap="wrap" xs={12} spacing={2}>
                     <Grid item xs={12}>
                         <TextField
                             fullWidth
                             name="cpf"
-                            placeholder="CPF*"
+                            label="CPF*"
                             onBlur={handleBlur}
                             onChange={(e) => onChange(e, "CPF")}
                             error={!!errors.cpf && touched.cpf}
@@ -43,7 +43,7 @@ export const LoanSimulationForm = () => {
                         <TextField
                             fullWidth
                             name="uf"
-                            placeholder="UF*"
+                            label="UF*"
                             onBlur={handleBlur}
                             onChange={(e) => onChange(e, "")}
                             error={!!errors.uf && touched.uf}
@@ -52,6 +52,8 @@ export const LoanSimulationForm = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
+                            label="Data de nascimento"
+                            InputLabelProps={{ shrink: true }}
                             fullWidth
                             name="bornDate"
                             onBlur={handleBlur}
@@ -65,7 +67,7 @@ export const LoanSimulationForm = () => {
                         <TextField
                             fullWidth
                             name="valueToLoan"
-                            placeholder="Qual o valor do empréstimo*"
+                            label="Qual o valor do empréstimo*"
                             onBlur={handleBlur}
                             onChange={(e) => onChange(e, "MONEY")}
                             error={!!errors.valueToLoan && touched.valueToLoan}
@@ -76,7 +78,7 @@ export const LoanSimulationForm = () => {
                         <TextField
                             fullWidth
                             name="valueToPayPerMonth"
-                            placeholder="Qual o valor que deseja pagar por mês*"
+                            label="Qual o valor que deseja pagar por mês*"
                             onBlur={handleBlur}
                             onChange={(e) => onChange(e, "MONEY")}
                             error={!!errors.valueToPayPerMonth && touched.valueToPayPerMonth}

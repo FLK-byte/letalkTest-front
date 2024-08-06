@@ -2,7 +2,7 @@ import { Grid } from "@mui/material"
 import { LoanSimulationFragment } from "../../modules/loanSimulation"
 
 export const LoanSimulationScreen = () => {
-    return <Grid sx={{
+    return <Grid container sx={{
         width: "100vw",
         height: "100vh",
         display: "flex",

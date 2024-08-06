@@ -3,8 +3,18 @@ import { LoanSimulationForm } from "../form"
 import { Formik } from "formik"
 import { loanSimulationValidation } from "../validations"
 import { toast } from "react-toastify"
+import { ViewLoanSimulation } from "../components"
+import { useState } from "react"
 
 export const LoanSimulationFragment = () => {
+    const [formValues, setFormValues] = useState<undefined | {
+        cpf: string,
+        uf: string,
+        bornDate: string,
+        valueToLoan: string,
+        valueToPayPerMonth: string,
+    }>()
+
     return <Formik
         initialValues={{
             cpf: "",
@@ -15,22 +25,38 @@ export const LoanSimulationFragment = () => {
         }}
         validationSchema={loanSimulationValidation}
         onSubmit={(values) => {
-            console.log(values)
-            toast("Empréstimo solicitado com sucesso!", { type: "success" })
+            setFormValues(values)
+            toast("Empréstimo simulado com sucesso!", { type: "success" })
         }}
     >
-        <Grid height={"100%"} width={"50%"}>
-            <Grid height={"50%"}>
-                <Typography
-                    variant={"h1"}
-                    color={"textPrimary"}
-                    marginTop={"3rem"}
-                    textAlign={"center"}
-                >
-                    Simule e solicite o seu empréstimo.
-                </Typography>
-                <LoanSimulationForm />
+        {props => {
+            if (Object.keys(props.errors).length > 0) setFormValues(undefined)
+            return <Grid
+                height={"100%"}
+                sx={{ width: { xs: "100%", md: "50%" } }}
+            >
+                <Grid xs={12}>
+                    <Typography
+                        variant={"h1"}
+                        color={"textPrimary"}
+                        marginTop={"3rem"}
+                        textAlign={"center"}
+                    >
+                        Simule e solicite o seu empréstimo.
+                    </Typography>
+                    <LoanSimulationForm />
+                </Grid>
+                {formValues && <Grid item xs={12}>
+                    <Typography
+                        marginTop={"3rem"}
+                        textAlign={"center"}
+                        variant="h2"
+                    >
+                        Veja a simulação para o seu empréstimo antes de efetivar
+                    </Typography>
+                    <ViewLoanSimulation loanValuePerMonth={props.values.valueToPayPerMonth} totalLoanValue={props.values.valueToLoan} uf={props.values.uf} />
+                </Grid>}
             </Grid>
-        </Grid>
-    </Formik>
+        }}
+    </Formik >
 }
