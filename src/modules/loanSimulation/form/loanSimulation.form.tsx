@@ -2,7 +2,7 @@ import { Button, Grid, Paper, TextField, Typography } from "@mui/material"
 import { applyPattern } from "../../../utils"
 import { useFormikContext } from "formik"
 
-export const LoanSimulationForm = () => {
+export const LoanSimulationForm = ({ onChangeField }: { onChangeField?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void }) => {
     const { setFieldValue, handleSubmit, errors, touched, handleBlur } = useFormikContext<{
         cpf: string,
         uf: string,
@@ -13,6 +13,7 @@ export const LoanSimulationForm = () => {
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, pattern: "CPF" | "MONEY" | "") => {
         e.target.value = applyPattern({ value: e.target.value, pattern })
+        onChangeField && onChangeField(e)
         setFieldValue(e.target.name, e.target.value)
     }
 

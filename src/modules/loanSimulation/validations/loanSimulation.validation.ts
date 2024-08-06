@@ -2,6 +2,7 @@ import * as yup from "yup";
 import { AllBrazilStates, INPUT_ERRORS } from "../../../utils/contants";
 import { MoneyRemoveMask } from "../../../utils";
 import { cpf } from "cpf-cnpj-validator";
+import moment from "moment";
 
 export const loanSimulationValidation = yup.object().shape({
     cpf: yup.string().required(INPUT_ERRORS.INPUT_ERROR_REQUIRED).test(
@@ -18,7 +19,14 @@ export const loanSimulationValidation = yup.object().shape({
           return AllBrazilStates.includes(value.toUpperCase())
         }
       ),
-    bornDate: yup.string().required(INPUT_ERRORS.INPUT_ERROR_REQUIRED),
+    bornDate: yup.string().required(INPUT_ERRORS.INPUT_ERROR_REQUIRED).test(
+        'is-one-percent', 
+        INPUT_ERRORS.INPUT_ERROR_INVALID_AGE, 
+        function(value) {
+          const date = moment(value);
+          return moment().diff(date, 'years') >= 18;
+        }
+    ),
     valueToLoan: yup.string().required(INPUT_ERRORS.INPUT_ERROR_REQUIRED).test(
         'is-one-percent', 
         'O valor precisa ser maior ou igual a R$ 50.000,00', 

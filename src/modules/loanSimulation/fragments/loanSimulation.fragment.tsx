@@ -44,7 +44,7 @@ export const LoanSimulationFragment = () => {
                     >
                         Simule e solicite o seu empréstimo.
                     </Typography>
-                    <LoanSimulationForm />
+                    <LoanSimulationForm onChangeField={() => setFormValues(undefined)} />
                 </Grid>
                 {formValues && <Grid item xs={12}>
                     <Typography
@@ -54,7 +54,11 @@ export const LoanSimulationFragment = () => {
                     >
                         Veja a simulação para o seu empréstimo antes de efetivar
                     </Typography>
-                    <ViewLoanSimulation loanValuePerMonth={props.values.valueToPayPerMonth} totalLoanValue={props.values.valueToLoan} uf={props.values.uf} />
+                    <ViewLoanSimulation
+                        loanValuePerMonth={props.values.valueToPayPerMonth}
+                        totalLoanValue={props.values.valueToLoan}
+                        uf={props.values.uf}
+                    />
                 </Grid>}
             </Grid>
         }}

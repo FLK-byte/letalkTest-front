@@ -4,7 +4,7 @@ type calcInterestRateProps = {
     intRate: number
 }
 
-type calcInterestRateReturn = {
+export type calcInterestRateReturn = {
     totalIntRateSum: string,
     monthsPayed: number,
     paymentsPerMonth: {
