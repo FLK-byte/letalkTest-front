@@ -2,7 +2,7 @@ import { Button, Divider, Grid, Paper, Typography, useMediaQuery, useTheme } fro
 import { AllBrazilStates, MoneyMask, MoneyRemoveMask, TaxPercentStates, calcInterestRate, calcInterestRateReturn } from "../../../../utils"
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import moment from "moment"
-import { PortionProjectionCard } from "../portionProjectionCard";
+import { LoansProjectionCards } from "../LoansProjectionCards";
 
 type ViewLoanSimulationProps = {
     totalLoanValue: string,
@@ -105,7 +105,7 @@ export const ViewLoanSimulation = ({ totalLoanValue, loanValuePerMonth, uf, onCl
                 }
 
             </Grid>
-        </Grid> : <PortionProjectionCard paymentsPerMonth={paymentsPerMonth} />}
+        </Grid> : <LoansProjectionCards paymentsPerMonth={paymentsPerMonth} />}
         <Button
             fullWidth
             endIcon={<ArrowForwardIcon />}

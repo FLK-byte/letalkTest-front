@@ -1,2 +1,2 @@
 export * from "./viewLoanSimulation"
-export * from "./portionProjectionCard"
+export * from "./LoansProjectionCards"

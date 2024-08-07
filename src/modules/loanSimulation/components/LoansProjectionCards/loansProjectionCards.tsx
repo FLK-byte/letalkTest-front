@@ -2,7 +2,7 @@ import moment from "moment"
 import { MoneyMask, calcInterestRateReturn } from "../../../../utils"
 import { Grid, Paper, Typography } from "@mui/material"
 
-export const PortionProjectionCard = ({ paymentsPerMonth }: { paymentsPerMonth: calcInterestRateReturn["paymentsPerMonth"] }) => {
+export const LoansProjectionCards = ({ paymentsPerMonth }: { paymentsPerMonth: calcInterestRateReturn["paymentsPerMonth"] }) => {
     return <Grid xs={12} maxHeight={"400px"} sx={{ overflowY: "auto" }}>
         {
             paymentsPerMonth.map(payment => {

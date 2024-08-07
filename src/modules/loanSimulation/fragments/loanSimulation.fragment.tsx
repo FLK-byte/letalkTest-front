@@ -8,25 +8,12 @@ import { useState } from "react"
 import { AxiosService } from "../../../services/api"
 import moment from "moment"
 import { CpfMaskRemove, MoneyRemoveMask, calcInterestRateReturn } from "../../../utils"
-
-type FormProps = {
-    cpf: string;
-    uf: string;
-    bornDate: string;
-    valueToLoan: string;
-    valueToPayPerMonth: string;
-}
+import { LoanFormProps } from "../types"
 
 export const LoanSimulationFragment = () => {
-    const [formValues, setFormValues] = useState<undefined | {
-        cpf: string,
-        uf: string,
-        bornDate: string,
-        valueToLoan: string,
-        valueToPayPerMonth: string,
-    }>()
+    const [formValues, setFormValues] = useState<undefined | LoanFormProps>()
 
-    const concludeLoan = async ({ paymentsPerMonth, props }: { paymentsPerMonth: calcInterestRateReturn["paymentsPerMonth"], props: FormikProps<FormProps> }) => {
+    const concludeLoan = async ({ paymentsPerMonth, props }: { paymentsPerMonth: calcInterestRateReturn["paymentsPerMonth"], props: FormikProps<LoanFormProps> }) => {
         try {
             const { data } = await AxiosService.post("/loans", {
                 userInfo: {
