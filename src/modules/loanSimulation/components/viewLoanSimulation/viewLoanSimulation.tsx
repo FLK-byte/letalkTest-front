@@ -2,6 +2,7 @@ import { Button, Divider, Grid, Paper, Typography, useMediaQuery, useTheme } fro
 import { AllBrazilStates, MoneyMask, MoneyRemoveMask, TaxPercentStates, calcInterestRate, calcInterestRateReturn } from "../../../../utils"
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import moment from "moment"
+import { PortionProjectionCard } from "../portionProjectionCard";
 
 type ViewLoanSimulationProps = {
     totalLoanValue: string,
@@ -56,7 +57,7 @@ export const ViewLoanSimulation = ({ totalLoanValue, loanValuePerMonth, uf, onCl
                 <Typography variant="h5" color={"textSecondary"}>PROJEÇÃO DAS PARCELAS:</Typography>
             </Grid>
         </Grid>
-        {(!lessThanSmall || true) && <Grid container marginTop={"3rem"} xs={12}>
+        {!lessThanSmall ? <Grid container marginTop={"3rem"} xs={12}>
             <Grid item xs={2}>
                 <Typography variant="h3" textAlign={"center"}>SALDO DO DEVEDOR</Typography>
             </Grid>
@@ -104,16 +105,16 @@ export const ViewLoanSimulation = ({ totalLoanValue, loanValuePerMonth, uf, onCl
                 }
 
             </Grid>
-            <Button
-                fullWidth
-                endIcon={<ArrowForwardIcon />}
-                color="success"
-                variant="contained"
-                sx={{ marginTop: "1rem" }}
-                onClick={() => onClickLoan && onClickLoan({ monthsPayed, paymentsPerMonth, totalIntRateSum })}
-            >
-                EFETIVAR O EMPRÉSTIMO
-            </Button>
-        </Grid>}
+        </Grid> : <PortionProjectionCard paymentsPerMonth={paymentsPerMonth} />}
+        <Button
+            fullWidth
+            endIcon={<ArrowForwardIcon />}
+            color="success"
+            variant="contained"
+            sx={{ marginTop: "1rem" }}
+            onClick={() => onClickLoan && onClickLoan({ monthsPayed, paymentsPerMonth, totalIntRateSum })}
+        >
+            EFETIVAR O EMPRÉSTIMO
+        </Button>
     </Paper>
 }
